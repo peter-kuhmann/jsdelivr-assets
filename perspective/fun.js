@@ -43,13 +43,3 @@ addScriptAfterCurrent("https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmo
         }).showWidget();
     });
 });
-
-addStyle(`
-    * {
-        transition: transform 0.2s ease;
-    }
-    
-    *:not(:has(div)):not(:has(a)):hover {
-        transform: scale(1.05);
-    }
-`);
