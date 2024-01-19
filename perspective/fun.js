@@ -49,7 +49,7 @@ addStyle(`
         transition: transform 0.2s ease;
     }
     
-    *:hover {
+    *:not(:has(div)):not(:has(a)):hover {
         transform: scale(1.05);
     }
 `);
