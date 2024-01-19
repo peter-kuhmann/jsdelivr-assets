@@ -50,6 +50,6 @@ addStyle(`
     }
     
     *:hover {
-        transform: rotate(4deg);
+        transform: scale(1.05);
     }
 `);
