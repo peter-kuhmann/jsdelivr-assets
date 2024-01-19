@@ -1,19 +1,39 @@
 const currentScript = document.currentScript;
 
-function addScriptAfterCurrent(src) {
+function addScriptAfterCurrent(src, optionalCallback = null) {
     const currentScript = document.currentScript;
     const newScript = document.createElement('script');
     newScript.src = src;
 
-    if (currentScript.nextSibling) {
+    if ( optionalCallback ) {
+        newScript.onload = () => {
+            optionalCallback();
+        }
+    }
+
+    if ( !currentScript ) {
+        document.body.appendChild(newScript);
+    } else if (currentScript.nextSibling) {
         currentScript.parentNode.insertBefore(newScript, currentScript.nextSibling);
     } else {
         currentScript.parentNode.appendChild(newScript);
     }
 }
 
-addScriptAfterCurrent("https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js");
+function executeOnLoad(callback) {
+    if (document.readyState === 'complete') {
+        callback();
+    } else {
+        window.addEventListener('load', callback);
+    }
+}
 
-window.addEventListener('load', () => {
-    new Darkmode().showWidget();
+addScriptAfterCurrent("https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js", () => {
+    executeOnLoad(() => {
+        new Darkmode({
+            saveInCookies: false,
+            label: '🌓',
+            autoMatchOsTheme: true,
+        }).showWidget();
+    });
 });
