@@ -43,3 +43,9 @@ addScriptAfterCurrent("https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmo
         }).showWidget();
     });
 });
+
+addStyle(`
+    button.darkmode-toggle {
+        z-index: 10000 !important;
+    }
+`)
